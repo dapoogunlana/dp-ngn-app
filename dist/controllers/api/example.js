@@ -24,8 +24,9 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const ipH = req.headers;
         const ipHx = req.headers['x-forwarded-for'];
         // console.log({reqIp: req.ip, remote: req.socket.remoteAddress})
-        const ipList = req.ip.split(':');
-        const ip = ipList[ipList.length - 1];
+        // const ipList = req.ip.split(':');
+        const ip = `${(req.headers['x-forwarded-for'] || '')}`.split(',')[0].trim() ||
+            req.socket.remoteAddress;
         if (!name) {
             return res.status(400).json({
                 success: false,
