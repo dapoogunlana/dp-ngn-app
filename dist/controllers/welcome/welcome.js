@@ -7,7 +7,7 @@ const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 router.get('/', (req, res) => {
     res.json({
-        message: 'Welcome to resource app'
+        message: 'Welcome to DP\'s app'
     });
 });
 exports.default = router;

@@ -1,8 +1,8 @@
 import express from 'express';
-import exampleController from './example';
+import helloController from './hello';
 
 const router = express.Router();
 
-router.use('/hello', exampleController);
+router.use('/hello', helloController);
 
 export default router;

@@ -1,12 +1,14 @@
 import express from 'express';
-import env from './services/auth-services/env-service';
-import bodyParser, { BodyParser } from 'body-parser';
+import bodyParser from 'body-parser';
 import cors from 'cors';
 import controllers from './controllers';
 import { initiateCrons } from './crons';
+import * as dotenv from 'dotenv';
+
+dotenv.config()
 
 const app = express();
-const port = env.PORT;
+const port = process.env.PORT;
 
 app.set('trust proxy', true);
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,5 +20,5 @@ initiateCrons();
 
 
 app.listen( port, () => {
-    console.log('App Running again on port ', port);
+    console.log('App Running on port ', port);
 });
