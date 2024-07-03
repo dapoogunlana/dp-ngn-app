@@ -20,7 +20,9 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;
     try {
         const name = (_a = req.query) === null || _a === void 0 ? void 0 : _a.visitor_name;
-        // const ip = req.socket.remoteAddress;
+        const ipv = req.socket.remoteAddress;
+        const ipH = req.headers;
+        const ipHx = req.headers['x-forwarded-for'];
         // console.log({reqIp: req.ip, remote: req.socket.remoteAddress})
         const ipList = req.ip.split(':');
         const ip = ipList[ipList.length - 1];
@@ -36,7 +38,7 @@ router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         const wheaterRes = yield fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location === null || location === void 0 ? void 0 : location.longitude}&lon=${location === null || location === void 0 ? void 0 : location.longitude}&appid=${process.env.OPEN_WEATHER_API_KEY}`);
         const wheater = yield wheaterRes.json();
         const temp = (((_b = wheater === null || wheater === void 0 ? void 0 : wheater.main) === null || _b === void 0 ? void 0 : _b.temp) || ((_c = wheater === null || wheater === void 0 ? void 0 : wheater.main) === null || _c === void 0 ? void 0 : _c.temp) === 0) ? `${(wheater.main.temp - 273.15).toFixed(1)} degrees Celcius` : 'temporarily unavailable';
-        console.log({ location, ip, rezz: req.ip, wheater, temp });
+        console.log({ location, ip, rezz: req.ip, wheater, temp, ipv, ipH, ipHx });
         return res.json({
             "client_ip": ip,
             "location": location === null || location === void 0 ? void 0 : location.city,

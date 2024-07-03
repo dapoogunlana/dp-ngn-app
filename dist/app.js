@@ -11,6 +11,7 @@ const controllers_1 = __importDefault(require("./controllers"));
 const crons_1 = require("./crons");
 const app = (0, express_1.default)();
 const port = env_service_1.default.PORT;
+app.set('trust proxy', true);
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use(body_parser_1.default.json());
 app.use((0, cors_1.default)());

@@ -7,7 +7,9 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try{
         const name = req.query?.visitor_name;
-        // const ip = req.socket.remoteAddress;
+        const ipv = req.socket.remoteAddress;
+        const ipH = req.headers
+        const ipHx = req.headers['x-forwarded-for']
         // console.log({reqIp: req.ip, remote: req.socket.remoteAddress})
         const ipList = req.ip.split(':');
         const ip = ipList[ipList.length -1];
@@ -23,7 +25,7 @@ router.get('/', async (req, res) => {
         const wheaterRes = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${location?.longitude}&lon=${location?.longitude}&appid=${process.env.OPEN_WEATHER_API_KEY}`);
         const wheater: any = await wheaterRes.json();
         const temp = (wheater?.main?.temp || wheater?.main?.temp === 0) ? `${(wheater.main.temp - 273.15).toFixed(1)} degrees Celcius` : 'temporarily unavailable';
-        console.log({location, ip, rezz: req.ip, wheater, temp})
+        console.log({location, ip, rezz: req.ip, wheater, temp, ipv, ipH, ipHx})
         return res.json({
             "client_ip": ip, 
             "location": location?.city,

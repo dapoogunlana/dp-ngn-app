@@ -8,6 +8,7 @@ import { initiateCrons } from './crons';
 const app = express();
 const port = env.PORT;
 
+app.set('trust proxy', true);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
