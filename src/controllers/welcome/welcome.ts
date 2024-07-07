@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     res.json({
-        message: 'Welcome to DP\'s app'
+        message: 'Welcome to DP\'s app.'
     });
 });
 
